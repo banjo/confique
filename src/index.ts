@@ -1,7 +1,9 @@
 import { includes } from "@banjoanton/utils";
-import { Jiti } from "./parser";
+import { Jiti } from "./parsers/jiti";
+import { Yaml } from "./parsers/yaml";
 
 const SUPPORTED_JITI_EXTENSIONS = ["json", "ts", "js", "cjs", "mjs"] as const;
+const SUPPORTED_YAML_EXTENSIONS = ["yaml", "yml"] as const;
 
 const getExtension = (path: string): string => {
     if (path.endsWith("rc")) {
@@ -50,9 +52,17 @@ const config = (libraryName: string, options?: Options) => {
             if (packageConfig) return packageConfig;
             return null;
         } else if (extension === "rc") {
-            const rc = await Jiti.parse(filePath);
+            const exportOption = options?.export || "default";
+            const rc = await Jiti.parse(filePath, { export: exportOption });
             if (rc) return rc;
-            // try yaml
+            const yamlRc = await Yaml.parse(filePath, { export: exportOption });
+            if (yamlRc) return yamlRc;
+            return null;
+        } else if (includes(SUPPORTED_YAML_EXTENSIONS, extension)) {
+            const exportOption = options?.export || "default";
+            const yamlConfig = await Yaml.parse(filePath, { export: exportOption });
+            if (yamlConfig) return yamlConfig;
+            return null;
         } else if (includes(SUPPORTED_JITI_EXTENSIONS, extension)) {
             const exportOption = options?.export || "default";
             const parsed = await Jiti.parse(filePath, { export: exportOption });
@@ -82,6 +92,6 @@ const config = (libraryName: string, options?: Options) => {
     };
 };
 
-const test = config("test", { export: "config", searchPaths: ["test.config.ts"] });
+const test = config("test", { export: "default", searchPaths: [".testrc"] });
 const result = await test.search();
 console.log(result);

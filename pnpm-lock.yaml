@@ -5,6 +5,7 @@ specifiers:
   '@banjoanton/eslint-config': ^0.1.6
   '@banjoanton/prettier-config': ^0.1.2
   '@banjoanton/utils': ^0.1.41
+  '@types/js-yaml': ^4.0.5
   '@types/node': ^18.15.11
   '@typescript-eslint/typescript-estree': ^5.57.0
   bumpp: ^9.1.0
@@ -14,6 +15,7 @@ specifiers:
   globby: ^13.1.3
   hoks: ^0.1.11
   jiti: ^1.18.2
+  js-yaml: ^4.1.0
   pnpm: ^8.1.0
   prettier: ^2.8.7
   tsup: ^6.7.0
@@ -26,12 +28,14 @@ dependencies:
   debug: 4.3.4
   globby: 13.1.3
   jiti: 1.18.2
+  js-yaml: 4.1.0
 
 devDependencies:
   '@antfu/ni': 0.21.2
   '@banjoanton/eslint-config': 0.1.6_jkymfytyrjjiqke6bxxoqz5fmi
   '@banjoanton/prettier-config': 0.1.2_prettier@2.8.7
   '@banjoanton/utils': 0.1.41
+  '@types/js-yaml': 4.0.5
   '@types/node': 18.15.11
   bumpp: 9.1.0
   eslint: 8.37.0
@@ -448,6 +452,10 @@ packages:
     resolution: {integrity: sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==}
     dev: true
 
+  /@types/js-yaml/4.0.5:
+    resolution: {integrity: sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==}
+    dev: true
+
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
@@ -711,7 +719,6 @@ packages:
 
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
-    dev: true
 
   /array-buffer-byte-length/1.0.0:
     resolution: {integrity: sha512-LPuwb2P+NrQw3XhxGc36+XSvuBPopovXYTR9Ew++Du9Yb/bx5AzBfrIsBoj0EZUifjQU+sHL21sseZ3jerWO/A==}
@@ -2303,7 +2310,6 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
-    dev: true
 
   /jsesc/0.5.0:
     resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
