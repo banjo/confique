@@ -1,0 +1,16 @@
+.cache
+.DS_Store
+.idea
+*.log
+*.tgz
+coverage
+dist
+lib-cov
+logs
+node_modules
+temp
+test.js
+test.cjs
+.testrc
+test.config.ts
+test.config.yaml
