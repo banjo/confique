@@ -13,6 +13,7 @@ specifiers:
   hoks: ^0.1.11
   jiti: ^1.18.2
   js-yaml: ^4.1.0
+  json5: ^2.2.3
   pnpm: ^8.1.0
   prettier: ^2.8.7
   tsup: ^6.7.0
@@ -35,6 +36,7 @@ devDependencies:
   eslint: 8.37.0
   esno: 0.16.3
   hoks: 0.1.11_typescript@5.0.3
+  json5: 2.2.3
   pnpm: 8.1.0
   prettier: 2.8.7
   tsup: 6.7.0_typescript@5.0.3

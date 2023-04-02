@@ -14,3 +14,4 @@ test.cjs
 .testrc
 test.config.ts
 test.config.yaml
+confique.config.*
