@@ -1,17 +1,17 @@
 {
-    "name": "confy",
+    "name": "confique",
     "type": "module",
     "version": "0.0.0",
     "private": false,
     "description": "",
     "author": "Anton Ödman <anton.odman@gmail.com>",
     "license": "MIT",
-    "homepage": "https://github.com/banjo/confy#readme",
+    "homepage": "https://github.com/banjo/confique#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/banjo/confy.git"
+        "url": "git+https://github.com/banjo/confique.git"
     },
-    "bugs": "https://github.com/banjo/confy/issues",
+    "bugs": "https://github.com/banjo/confique/issues",
     "keywords": [],
     "sideEffects": false,
     "main": "dist/index.js",
