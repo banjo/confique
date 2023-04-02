@@ -13,15 +13,19 @@ const defaultSearchPaths = (libraryName: string) => [
     "package.json",
     `.${libraryName}rc`,
     `.${libraryName}rc.ts`,
-    `.${libraryName}rc.json`,
     `.${libraryName}rc.js`,
     `.${libraryName}rc.cjs`,
     `.${libraryName}rc.mjs`,
+    `.${libraryName}rc.json`,
+    `.${libraryName}rc.yaml`,
+    `.${libraryName}rc.yml`,
     `${libraryName}.config.ts`,
     `${libraryName}.config.js`,
     `${libraryName}.config.cjs`,
     `${libraryName}.config.mjs`,
     `${libraryName}.config.json`,
+    `${libraryName}.config.yaml`,
+    `${libraryName}.config.yml`,
 ];
 
 type Options = {
