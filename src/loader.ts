@@ -1,10 +1,10 @@
 import { includes, sortBy } from "@banjoanton/utils";
 import {
     getExtension,
-    SupportedExtensions,
     SUPPORTED_EXTENSIONS,
     SUPPORTED_JITI_EXTENSIONS,
     SUPPORTED_YAML_EXTENSIONS,
+    type SupportedExtensions,
 } from "./extension";
 import { Jiti } from "./parsers/jiti";
 import { Yaml } from "./parsers/yaml";
