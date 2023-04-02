@@ -52,7 +52,7 @@ const defaultSearchPaths = (libraryName: string) => [
 const config = (libraryName: string, options?: Options) => {
     const searchPaths = options?.searchPaths || defaultSearchPaths(libraryName);
 
-    const load = async (filePath: string) => {
+    const load = async (filePath: string, options?: Options) => {
         const extension = getExtension(filePath);
 
         if (filePath.endsWith("package.json")) {
@@ -102,7 +102,7 @@ const config = (libraryName: string, options?: Options) => {
         });
 
         for (const path of paths) {
-            const loadedConfig = await load(path);
+            const loadedConfig = await load(path, options);
             if (loadedConfig) return loadedConfig;
         }
 
@@ -120,5 +120,5 @@ const config = (libraryName: string, options?: Options) => {
 };
 
 const test = config("test", { export: "default", preferOrder: ["ts", "package.json"] });
-const result = await test.search();
+const result = await test.load("test.config.ts", { export: "config" });
 console.log(result);
