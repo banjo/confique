@@ -14,12 +14,14 @@ export const parser = ({
     content: string;
     parsed: any;
     options: ParseOptions;
+    filePath: string;
 }) => {
+    const useDefaultExport = options.export === "default";
+
     if (content.includes("module.exports")) {
         return parsed;
     }
 
-    const useDefaultExport = options.export === "default";
     const hasDefaultExport = parsed.default !== undefined;
     if (hasDefaultExport && useDefaultExport) {
         return parsed.default;
@@ -29,5 +31,15 @@ export const parser = ({
         return parsed;
     }
 
-    return parsed[options.export];
+    const customInModuleExports = parsed[options.export];
+    if (customInModuleExports) {
+        return customInModuleExports;
+    }
+
+    const customInDefault = parsed?.default?.[options.export];
+    if (hasDefaultExport && customInDefault) {
+        return customInDefault;
+    }
+
+    return null;
 };

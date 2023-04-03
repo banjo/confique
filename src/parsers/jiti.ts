@@ -19,7 +19,7 @@ const parse = async (filePath: string, options?: ParseOptions) => {
         return null;
     }
 
-    return parser({ content, options: opts, parsed });
+    return parser({ content, options: opts, parsed, filePath });
 };
 
 const parseSync = (filePath: string, options?: ParseOptions) => {
@@ -35,7 +35,7 @@ const parseSync = (filePath: string, options?: ParseOptions) => {
         return null;
     }
 
-    return parser({ content, options: opts, parsed });
+    return parser({ content, options: opts, parsed, filePath });
 };
 
 export const Jiti = {

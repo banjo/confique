@@ -11,23 +11,29 @@ const parse = async (filePath: string, options?: ParseOptions) => {
     try {
         content = await fs.promises.readFile(fullPath, "utf8");
         parsed = yaml.load(content);
-    } catch {
+    } catch (error: any) {
+        console.log(error?.message);
         return null;
     }
 
-    return parser({ content, options: opts, parsed });
+    return parser({ content, options: opts, parsed, filePath });
 };
 
-const parseSync = (filePath: string) => {
+const parseSync = (filePath: string, options?: ParseOptions) => {
+    const opts = { ...defaultOptions, ...options };
+
     const fullPath = `${process.cwd()}/${filePath}`;
 
+    let parsed: unknown | null = null;
+    let content: string | null = null;
     try {
-        const content = fs.readFileSync(fullPath, "utf8");
-        const parsed = yaml.load(content);
-        return parsed;
+        content = fs.readFileSync(fullPath, "utf8");
+        parsed = yaml.load(content);
     } catch {
         return null;
     }
+
+    return parser({ content, options: opts, parsed, filePath });
 };
 
 export const Yaml = {

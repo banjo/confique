@@ -1,6 +1,7 @@
 import { includes, sortBy } from "@banjoanton/utils";
 import {
     getExtension,
+    PACKAGE_TEST_EXTENSION,
     SUPPORTED_EXTENSIONS,
     SUPPORTED_JITI_EXTENSIONS,
     SUPPORTED_YAML_EXTENSIONS,
@@ -41,24 +42,30 @@ export const confique = (libraryName: string, options?: Options) => {
     const load = async (filePath: string, options?: Options) => {
         const extension = getExtension(filePath);
 
-        if (filePath.endsWith("package.json")) {
+        if (filePath.endsWith("package.json") || filePath.endsWith(PACKAGE_TEST_EXTENSION)) {
             const packageJson = await Jiti.parse(filePath);
-            const packageConfig = packageJson?.[libraryName];
+            const packageConfig = packageJson?.[options?.export ?? libraryName];
             if (packageConfig) return packageConfig;
             return null;
-        } else if (extension === "rc") {
+        }
+
+        if (extension === "rc") {
             const exportOption = options?.export || "default";
             const rc = await Jiti.parse(filePath, { export: exportOption });
             if (rc) return rc;
             const yamlRc = await Yaml.parse(filePath, { export: exportOption });
             if (yamlRc) return yamlRc;
             return null;
-        } else if (includes(SUPPORTED_YAML_EXTENSIONS, extension)) {
+        }
+
+        if (includes(SUPPORTED_YAML_EXTENSIONS, extension)) {
             const exportOption = options?.export || "default";
             const yamlConfig = await Yaml.parse(filePath, { export: exportOption });
             if (yamlConfig) return yamlConfig;
             return null;
-        } else if (includes(SUPPORTED_JITI_EXTENSIONS, extension)) {
+        }
+
+        if (includes(SUPPORTED_JITI_EXTENSIONS, extension)) {
             const exportOption = options?.export || "default";
             const parsed = await Jiti.parse(filePath, { export: exportOption });
             if (parsed) return parsed;
