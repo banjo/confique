@@ -10,7 +10,7 @@ import {
 import { Jiti } from "./parsers/jiti";
 import { Yaml } from "./parsers/yaml";
 
-const defaultSearchPaths = (libraryName: string) => [
+const defaultFileNames = (libraryName: string) => [
     "package.json",
     `.${libraryName}rc`,
     `.${libraryName}rc.ts`,
@@ -30,44 +30,44 @@ const defaultSearchPaths = (libraryName: string) => [
 ];
 
 type Options = {
-    searchPaths?: string[];
+    fileNames?: string[];
     throw?: boolean;
-    export?: string;
+    module?: string;
     preferOrder?: SupportedExtensions[];
 };
 
 export const confique = (libraryName: string, options?: Options) => {
-    const searchPaths = options?.searchPaths || defaultSearchPaths(libraryName);
+    const fileNames = options?.fileNames || defaultFileNames(libraryName);
 
     const load = async (filePath: string, options?: Options) => {
         const extension = getExtension(filePath);
 
         if (filePath.endsWith("package.json") || filePath.endsWith(PACKAGE_TEST_EXTENSION)) {
             const packageJson = await Jiti.parse(filePath);
-            const packageConfig = packageJson?.[options?.export ?? libraryName];
+            const packageConfig = packageJson?.[options?.module ?? libraryName];
             if (packageConfig) return packageConfig;
             return null;
         }
 
         if (extension === "rc") {
-            const exportOption = options?.export || "default";
-            const rc = await Jiti.parse(filePath, { export: exportOption });
+            const exportOption = options?.module || "default";
+            const rc = await Jiti.parse(filePath, { module: exportOption });
             if (rc) return rc;
-            const yamlRc = await Yaml.parse(filePath, { export: exportOption });
+            const yamlRc = await Yaml.parse(filePath, { module: exportOption });
             if (yamlRc) return yamlRc;
             return null;
         }
 
         if (includes(SUPPORTED_YAML_EXTENSIONS, extension)) {
-            const exportOption = options?.export || "default";
-            const yamlConfig = await Yaml.parse(filePath, { export: exportOption });
+            const exportOption = options?.module || "default";
+            const yamlConfig = await Yaml.parse(filePath, { module: exportOption });
             if (yamlConfig) return yamlConfig;
             return null;
         }
 
         if (includes(SUPPORTED_JITI_EXTENSIONS, extension)) {
-            const exportOption = options?.export || "default";
-            const parsed = await Jiti.parse(filePath, { export: exportOption });
+            const exportOption = options?.module || "default";
+            const parsed = await Jiti.parse(filePath, { module: exportOption });
             if (parsed) return parsed;
             return null;
         }
@@ -76,7 +76,7 @@ export const confique = (libraryName: string, options?: Options) => {
     };
 
     const search = async () => {
-        const paths = sortBy(searchPaths, path => {
+        const paths = sortBy(fileNames, path => {
             const preferredOrder = options?.preferOrder || [];
 
             const extension = getExtension(path);

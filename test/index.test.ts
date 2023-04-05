@@ -147,7 +147,7 @@ describe("confique", () => {
     it("works with custom export for TS", async () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "ts", customExport);
-        const config = confique(libName, { export: customExport });
+        const config = confique(libName, { module: customExport });
         const result = await config.search();
         expect(result).toEqual(createConfig("ts"));
         await created.delete();
@@ -156,7 +156,7 @@ describe("confique", () => {
     it("works with custom export for JS", async () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "js", customExport);
-        const config = confique(libName, { export: customExport });
+        const config = confique(libName, { module: customExport });
         const result = await config.search();
         expect(result).toEqual(createConfig("js"));
         await created.delete();
@@ -165,7 +165,7 @@ describe("confique", () => {
     it("works with custom export for JSON", async () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "json", customExport);
-        const config = confique(libName, { export: customExport });
+        const config = confique(libName, { module: customExport });
         const result = await config.search();
         expect(result).toEqual(createConfig("json"));
         await created.delete();
@@ -174,7 +174,7 @@ describe("confique", () => {
     it("works with custom export for YAML", async () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "yaml", customExport);
-        const config = confique(libName, { export: customExport });
+        const config = confique(libName, { module: customExport });
         const result = await config.search();
         expect(result).toEqual(createConfig("yaml"));
         await created.delete();
@@ -183,7 +183,7 @@ describe("confique", () => {
     it("works with custom export for RC", async () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "rc", customExport);
-        const config = confique(libName, { export: customExport });
+        const config = confique(libName, { module: customExport });
         const result = await config.search();
         expect(result).toEqual(createConfig("rc"));
         await created.delete();
@@ -193,8 +193,8 @@ describe("confique", () => {
         const customExport = "custom";
         const created = await createConfigFile(libName, "package.json", customExport);
         const config = confique(libName, {
-            export: customExport,
-            searchPaths: [`${libName}-${PACKAGE_TEST_EXTENSION}`],
+            module: customExport,
+            fileNames: [`${libName}-${PACKAGE_TEST_EXTENSION}`],
         });
         const result = await config.search();
         expect(result).toEqual(createConfig("package.json"));

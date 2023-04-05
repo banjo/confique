@@ -1,9 +1,9 @@
 export type ParseOptions = {
-    export: string;
+    module: string;
 };
 
 export const defaultOptions: ParseOptions = {
-    export: "default",
+    module: "default",
 };
 
 export const parser = ({
@@ -16,7 +16,7 @@ export const parser = ({
     options: ParseOptions;
     filePath: string;
 }) => {
-    const useDefaultExport = options.export === "default";
+    const useDefaultExport = options.module === "default";
 
     if (content.includes("module.exports")) {
         return parsed;
@@ -31,12 +31,12 @@ export const parser = ({
         return parsed;
     }
 
-    const customInModuleExports = parsed[options.export];
+    const customInModuleExports = parsed[options.module];
     if (customInModuleExports) {
         return customInModuleExports;
     }
 
-    const customInDefault = parsed?.default?.[options.export];
+    const customInDefault = parsed?.default?.[options.module];
     if (hasDefaultExport && customInDefault) {
         return customInDefault;
     }
