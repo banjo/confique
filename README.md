@@ -2,7 +2,7 @@
 
 > A simple configuration loader with TypeScript and ESM support out of the box
 
-[![NPM version](https://img.shields.io/npm/v/@banjoanton/confique?color=%23c53635&label=%20)](https://www.npmjs.com/package/@banjoanton/confique)
+[![NPM version](https://img.shields.io/npm/v/confique?color=%23c53635&label=%20)](https://www.npmjs.com/package/confique)
 
 -   Search and load configuration
 -   Good defaults or customise to your needs
@@ -13,7 +13,7 @@ Will load the files in the following order by default, for a library called `ban
 
 -   `package.json`
 -   .rc files (`.banjorc`, `.banjorc.ts`, `.banjorc.js`, `.banjorc.cjs`, `.banjorc.mjs`, `.banjorc.json`, `.banjorc.yaml`, `.banjorc.yml`)
--   config files (`.banjo.config.ts`, `.banjo.config.js`, `.banjo.config.cjs`, `.banjo.config.mjs`, `.banjo.config.json`, `.banjo.config.yaml`, `.banjo.config.yml`)
+-   config files (`banjo.config.ts`, `banjo.config.js`, `banjo.config.cjs`, `banjo.config.mjs`, `banjo.config.json`, `banjo.config.yaml`, `banjo.config.yml`)
 
 ## Installation
 
@@ -24,6 +24,9 @@ npm install confique
 ## Usage
 
 ```ts
+import { confique } from "confique";
+
+
 // different ways to configure
 const confiq = confique("libraryName");
 const confiq = confique("libraryName", { preferOrder: ["js", "ts"] });
